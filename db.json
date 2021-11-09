@@ -1,0 +1,66 @@
+[{
+    "preview": "img/db/indotravel-min",
+    "image": "img/db/indotravel",
+    "client": "Nabali",
+    "year": 2021,
+    "type": "Landing page"
+  },
+
+  {
+    "preview": "img/db/friendly_house-min",
+    "image": "img/db/friendly_house",
+    "client": "Friendly",
+    "year": 2020,
+    "type": "Многостраничный сайт"
+  },
+  {
+    "preview": "img/db/dom-min",
+    "image": "img/db/dom",
+    "client": "Дом",
+    "year": 2020,
+    "type": "Корпоративный сайт"
+  },
+
+
+  {
+    "preview": "img/db/iphone-min",
+    "image": "img/db/iphone",
+    "client": "Full Apple",
+    "year": 2021,
+    "type": "Landing-page"
+  },
+
+  {
+    "preview": "img/db/go-min",
+    "image": "img/db/go",
+    "client": "Game Over",
+    "year": 2019,
+    "type": "Landing-page"
+  },
+
+  {
+    "preview": "img/db/cinema-min",
+    "image": "img/db/cinema",
+    "client": "Cinema",
+    "year": 2020,
+    "type": "Многостраничный сайт"
+  },
+
+  {
+    "preview": "img/db/mth-min",
+    "image": "img/db/mth",
+    "client": "MTH",
+    "year": 2019,
+    "type": "Корпоративный сайт"
+  },
+
+  {
+    "preview": "img/db/artdeco-min",
+    "image": "img/db/artdeco",
+    "client": "ArtDeco",
+    "year": 2019,
+    "type": "Корпоративный сайт"
+  }
+
+
+]
