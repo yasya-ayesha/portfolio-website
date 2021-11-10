@@ -1,6 +1,10 @@
 const disabledScroll = () => {
   const widthScroll = window.innerWidth - document.body.offsetWidth;
   document.body.scrollPosition = window.scrollY;
+  document.documentElement.style.cssText = `
+    position: relative;
+    height: 100vh;
+  `
   document.body.style.cssText = `
     overflow: hidden;
     position: fixed;
@@ -13,6 +17,7 @@ const disabledScroll = () => {
 };
 
 const enabledScroll = () => {
+  document.documentElement.style.cssText = '';
   document.body.style.cssText = 'position: relative;';
   window.scroll({top: document.body.scrollPosition});
 };
