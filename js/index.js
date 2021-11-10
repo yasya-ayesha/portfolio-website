@@ -5,16 +5,24 @@ const modalClose = document.querySelector('.modal__close');
 const handlerModal = (openBtn, modal, openSelector, closeTrigger, sk = 'default') => {
   let opacity = 0;
   const speed = {
-    slow: 10,
-    medium: 8,
-    fast: 1,
-    default: 5
+    slow: 0.02,
+    medium: 0.05,
+    fast: 0.1
   };
   
   openBtn.addEventListener('click', () => {
     modal.style.opacity = opacity;
     modal.classList.add(openSelector);
 
+    const anim = () => {
+      opacity += speed[sk];
+      modal.style.opacity = opacity;
+      if (opacity < 1) requestAnimationFrame(anim);
+    };
+    requestAnimationFrame(anim);
+
+    /* 
+    * alternative animation through setInterval
     const timer = setInterval(() => {
       opacity += 0.02;
       modal.style.opacity = opacity;
@@ -22,9 +30,23 @@ const handlerModal = (openBtn, modal, openSelector, closeTrigger, sk = 'default'
     }, speed[sk]
     // speed[sk] ? speed[sk] : speed.default - alternative way to set speed
     );
+    */
   });
-
+  
   closeTrigger.addEventListener('click', () => {
+    const anim = () => {
+      opacity -= speed[sk];
+      modal.style.opacity = opacity;
+      if (opacity > 0) {
+        requestAnimationFrame(anim);
+      } else {
+        modal.classList.remove(openSelector);
+      }
+    };
+    requestAnimationFrame(anim);
+
+    /* 
+    * alternative animation through setInterval
     const timer = setInterval(() => {
       opacity -= 0.02;
       modal.style.opacity = opacity;
@@ -33,7 +55,8 @@ const handlerModal = (openBtn, modal, openSelector, closeTrigger, sk = 'default'
         modal.classList.remove(openSelector);
       }
     }, speed[sk]);
-  })
+    */
+  });
 };
 
 handlerModal(
@@ -41,5 +64,5 @@ handlerModal(
   pageOverlayModal, 
   'page__overlay_modal_open', 
   modalClose, 
-  'default'
+  'medium'
   );
