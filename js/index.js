@@ -122,3 +122,55 @@ const enabledScroll = () => {
   };
   handlerBurger(headerContactsBurger, headerContacts, 'header__contacts_open');
 }
+
+{ // * gallery
+  const portfolioList = document.querySelector('.portfolio__list');
+  
+  const pageOverlay = document.createElement('div');
+  pageOverlay.classList.add('page__overlay');
+
+  portfolioList.addEventListener('click', (event) => {
+    const card = event.target.closest('.card');
+    if (card) {
+      document.body.append(pageOverlay);
+      const title = card.querySelector('.card__client');
+
+      const picture = document.createElement('picture');
+      picture.style.cssText = `
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 1440px;
+      `;
+
+      picture.innerHTML = `
+        <source srcset="${card.dataset.fullImage}.avif" type="image/avif">
+        <source srcset="${card.dataset.fullImage}.webp" type="image/webp">
+        <img src="${card.dataset.fullImage}.jpg" alt="${title.textContent}">
+      `;
+
+      /* 
+      * simple way to add image (.jpg only)
+      // .avif is tiniest one, .webp is 2 times heavier and .jpg is 2 times heavier than .webp
+      const img = document.createElement('img');
+      img.src = card.dataset.fullImage + '.jpg';
+      img.style.cssText = `
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      `
+      */
+
+      pageOverlay.append(picture);
+      disabledScroll();
+    }
+  });
+  pageOverlay.addEventListener('click', () => {
+    pageOverlay.remove();
+    pageOverlay.textContent = '';
+    enabledScroll();
+  })
+}
