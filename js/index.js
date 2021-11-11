@@ -1,5 +1,8 @@
 const disabledScroll = () => {
   const widthScroll = window.innerWidth - document.body.offsetWidth;
+
+  document.querySelector('.page__header').style.left = `calc(50% - ${720 + widthScroll/2}px)`; // fix bug with jumping section while modal opens/closes
+  
   document.body.scrollPosition = window.scrollY;
   document.documentElement.style.cssText = `
     position: relative;
@@ -17,6 +20,7 @@ const disabledScroll = () => {
 };
 
 const enabledScroll = () => {
+  document.querySelector('.page__header').style.left = 'calc(50% - 720px)';
   document.documentElement.style.cssText = '';
   document.body.style.cssText = 'position: relative;';
   window.scroll({top: document.body.scrollPosition});
