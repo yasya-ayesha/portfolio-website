@@ -1,8 +1,16 @@
+const pageHeader = document.querySelector('.page__header');
+
 const disabledScroll = () => {
   const widthScroll = window.innerWidth - document.body.offsetWidth;
-
-  document.querySelector('.page__header').style.left = `calc(50% - ${720 + widthScroll/2}px)`; // fix bug with jumping section while modal opens/closes
   
+  // fix bug with jumping section while modal opens/closes
+  if (window.innerWidth >= 992) {
+    pageHeader.style.left = `calc(50% - 50vw - ${widthScroll/2}px)`;
+  }
+  if (window.innerWidth >= 1440) {
+    pageHeader.style.left = `calc(50% - ${720 + widthScroll/2}px)`;
+  }
+    
   document.body.scrollPosition = window.scrollY;
   document.documentElement.style.cssText = `
     position: relative;
@@ -20,7 +28,7 @@ const disabledScroll = () => {
 };
 
 const enabledScroll = () => {
-  document.querySelector('.page__header').style.left = 'calc(50% - 720px)';
+  pageHeader.style.left = '';
   document.documentElement.style.cssText = '';
   document.body.style.cssText = 'position: relative;';
   window.scroll({top: document.body.scrollPosition});
@@ -46,7 +54,11 @@ const enabledScroll = () => {
       const anim = () => {
         opacity += speed[sk];
         modal.style.opacity = opacity;
-        if (opacity < 1) requestAnimationFrame(anim);
+        if (opacity < 1) requestAnimationFrame(anim)
+        else {
+          opacity = 1;
+          modal.style.opacity = 1;
+        };
       };
       requestAnimationFrame(anim);
       /* 
@@ -62,7 +74,6 @@ const enabledScroll = () => {
     };
 
     const closeModal = () => {
-      enabledScroll();
       const anim = () => {
         opacity -= speed[sk];
         modal.style.opacity = opacity;
@@ -70,6 +81,9 @@ const enabledScroll = () => {
           requestAnimationFrame(anim);
         } else {
           modal.classList.remove(openSelector);
+          opacity = 0;
+          modal.style.opacity = 0;
+          enabledScroll();
         }
       };
       requestAnimationFrame(anim);
@@ -125,7 +139,6 @@ const enabledScroll = () => {
 
 { // * gallery
   const portfolioList = document.querySelector('.portfolio__list');
-  
   const pageOverlay = document.createElement('div');
   pageOverlay.classList.add('page__overlay');
 
